@@ -89,13 +89,12 @@ A local registry setup can be done using [docker distribution project](https://g
   - <code>docker run -p HOSTNAME:PORT [image]</code> > starts a container from image and maps a hostname:port to it
   - <code>docker run --add-host HOSTNAME:IP [image]</code> > starts a container from image and assign a DNS entry
   - <code>docker run --rm [image]</code> > removes a container after it stops
-  - <code>docker run -td [image]</code> > starts a container anad keep it running
+  - <code>docker run -td [image]</code> > starts a container and keep it running
   - <code>docker run -it [image] [cmd]</code> > create, start and run a command inside this container
   - <code>docker run -it -rm [image] [cmd]</code> > create, start and run a command inside this container, and removes the container
 
 * `docker tag myimage:1.0 myrepo/myimage:2.0` Retag a local image with a new image name and tag
 * `docker import [url/file]` create an image from a tarball
-* `dcker commit [CONTAINER] [NEW_IMAGE_NAME]` create an image from a container
 * `docker save my_image:my_tag | gzip > my_image.tar.gz` saves image to tar archive with all parents, tags and versions
 ```
 docker save ngnix > nginx.tar
@@ -118,7 +117,7 @@ docker load -i < nginx.tar
 * `docker container logs --tail 100 web` Print the last 100  lines of a container’s logs
 * `docker update [CONTAINER]` updates the configuration of a container
 * `docker cp CONTAINER:SOURCE-PATH TARGET-PATH-On-Host` COPY a file from container to Host
-* `docker cp TARGET-PATH-On-Hos CONTAINER:SOURCE-PATH` COPY a file from host to container
+* `docker cp TARGET-PATH-On-Host CONTAINER:SOURCE-PATH` COPY a file from host to container
 ### Network
 
 Docker has a networks feature. Docker automatically creates 3 network interfaces when you install it (bridge, host none). A new container is launched into the bridge network by default. To enable communication between multiple containers, you can create a new network and launch containers in it. This enbales containers to communicate to each other while being isolated from containers that are not connected to the network. Furthermore, it allows to map container names to their IP addresses. See [working with networks](https://docs.docker.com/network/) for more details.
