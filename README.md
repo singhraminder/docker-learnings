@@ -1,4 +1,6 @@
 # Docker-Cheat-sheet
+Below Docker Architecture pic is from : https://docs.docker.com/get-started/overview/
+![](https://docs.docker.com/engine/images/architecture.svg)
 ## Contents:
 
 ## Basics
@@ -200,10 +202,21 @@ CMD ["app.py"]
 
 ## Docker-compose
 
+[Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
+
+`docker-compose ps`
+
+`docker-compose start`
+
+`docker-compose stop`
+
+`docker-compose up`
+
+`docker-compose down`
+
 ```
 # docker-compose.yml
 version: '2'
-
 services:
   web:
     build: .
@@ -217,7 +230,6 @@ services:
   redis:
     image: redis
 ```
-
 ```
 version: "2"
 services: 
@@ -232,17 +244,23 @@ services:
   mongo: # container name
     image: mongo # image name
 ```
-
-`docker-compose ps`
-
-`docker-compose start`
-
-`docker-compose stop`
-
-`docker-compose up`
-
-`docker-compose down`
-
+```
+version: '2.0'
+services:
+  web:
+    build: .
+    ports:
+    - "5000:5000"
+    volumes:
+    - .:/code
+    - logvolume01:/var/log
+    links:
+    - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+```
 
 ## External Links
 
