@@ -150,6 +150,9 @@ $ curl 101.0.111.2
 * `docker rm [CONTAINER]` Delete a container (if it is not running)
 
 ## Dockerfile syntax
+
+The Dockerfile is the blueprint for how Docker should construct the container and run your application.
+
 * FROM image/scratch : base image for the build
 * MAINTAINER email : metadata of the maintainer
 * COPY host-path container-dest : copy file from host into container
@@ -179,6 +182,20 @@ CMD    ["bundle", "exec", "rails", "server"]
 ENTRYPOINT ["executable", "param1", "param2"]
 ENTRYPOINT command param1 param2
 ENTRYPOINT exec top -b
+```
+```
+# Inherit from the Python Docker image
+FROM python:3.7-slim
+# Install the web framework “Flask” via the package manager, pip
+RUN pip install flask==1.0.2
+# Copy the source code to app folder
+COPY ./app.py /app/
+# Change the working directory
+WORKDIR /app/
+# Set "python" as the entry point
+ENTRYPOINT ["python"]
+# Set the command as the script name
+CMD ["app.py"]
 ```
 
 ## Docker-compose
